@@ -24,10 +24,13 @@ def translate_it():
                 to_language_key = key
                 if to_language_key == 'zh-cn':
                     to_language_key = 'ZH'
+                to_deepl_language_key = to_language_key
+                if to_language_key == 'en':
+                    to_deepl_language_key = 'EN-US'
         words = textblob.TextBlob(original_text.get(1.0,END))
 
         google_words = words.translate(from_lang=from_language_key,to=to_language_key)
-        deepl_words = deepl_translator_conn.translate_text(text=str(words),source_lang=from_language_key,target_lang=to_language_key).text
+        deepl_words = deepl_translator_conn.translate_text(text=str(words),source_lang=from_language_key,target_lang=to_deepl_language_key).text
         #Output translated text  to screen
         translated_text.insert(1.0,google_words)
         deepl_translated_text.insert(1.0, deepl_words)
